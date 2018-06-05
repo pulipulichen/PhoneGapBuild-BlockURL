@@ -6,7 +6,7 @@ intent_handler = function (intent) {
     catch (e) {
         alert(e);
     }
-    window.open("http://pc.pulipuli.info/phonegap-build-projects/PhoneGapBuild-BlockURL/test/app-debug.apk", "_system");
+    //window.open("http://pc.pulipuli.info/phonegap-build-projects/PhoneGapBuild-BlockURL/test/app-debug.apk", "_system");
     //navigator.app.exitApp();
     return;
     
@@ -152,30 +152,41 @@ intent_handler = function (intent) {
 };
 
 function downloadFile(){
-
-window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-
-    function onFileSystemSuccess(fileSystem) {
-        fileSystem.root.getFile(
-        "dummy.html", {create: true, exclusive: false}, 
-        function gotFileEntry(fileEntry) {
-            var sPath = fileEntry.fullPath.replace("dummy.html","");
-            var fileTransfer = new FileTransfer();
-            fileEntry.remove();
-
-            fileTransfer.download(
-                "http://www.w3.org/2011/web-apps-ws/papers/Nitobi.pdf",
-                sPath + "theFile.pdf",
-                function(theFile) {
-                    console.log("download complete: " + theFile.toURI());
-                    showLink(theFile.toURI());
-                },
-                function(error) {
-                    console.log("download error source " + error.source);
-                    console.log("download error target " + error.target);
-                    console.log("upload error code: " + error.code);
+    var _filename = "a.pdf";
+    var _content = "test";
+    
+    var fail = function (e) {
+        alert(JSON.stringify(e));
+    };
+    
+    window.requestFileSystem(window.TEMPORARY, 0, function (fs) {
+            //alert('file system open: ' + fs.name);
+            //alert('file system open: ' + cordova.file.cacheDirectory);
+            fs.root.getFile(_filename, {create: true, exclusive: false}, function (fileEntry) {
+                var sPath = fileEntry.fullPath.replace(_filename,"");
+                alert(sPath);
+                
+                try {
+                    var fileTransfer = new FileTransfer();
+                    fileEntry.remove();
+                    fileTransfer.download(
+                        "http://www.w3.org/2011/web-apps-ws/papers/Nitobi.pdf",
+                        sPath + "theFile.pdf",
+                        function(theFile) {
+                            alert("download complete: " + theFile.toURI());
+                            showLink(theFile.toURI());
+                        },
+                        function(error) {
+                            alert("download error source " + error.source);
+                            alert("download error target " + error.target);
+                            alert("upload error code: " + error.code);
+                        }
+                    );
                 }
-            );
-        }, fail);
-    }, fail);
+                catch (e) {
+                    alert("ee");
+                    fail(e);
+                }
+            }, fail);
+        });
 };
