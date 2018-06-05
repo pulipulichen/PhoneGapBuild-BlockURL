@@ -1,8 +1,8 @@
 intent_handler = function (intent) {
-    
+    alert("換了 可以嗎？");
         cordova.plugins.fileOpener2.open(
         'https://build.phonegap.com/apps/3177726/download/android', 
-        'application/vnd.android.package-archive'
+        'application/vnd.android.package-archive');
     
     alert("換了 可以嗎？");
     return;

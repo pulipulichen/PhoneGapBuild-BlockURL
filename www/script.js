@@ -1,5 +1,5 @@
 ready = function () {
-    
+    alert(111);
     intent_handler();
     return;
         
