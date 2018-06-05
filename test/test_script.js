@@ -1,16 +1,13 @@
 intent_handler = function (intent) {
     alert("ok?");
     try {
-        //cordova.plugins.fileOpener2.open(
-        //'/sdcard/Download/app-debug-144.apk', 
-        //'application/vnd.android.package-archive');
-        //fileOpener.open("file:///sdcard/Download/app-debug-144.apk");
-        window.cordova.plugins.FileOpener.openFile("file:///storage/emulated/0/Download/local_file.pdf", onSuccess, onError);
+        downloadFile();
     }
     catch (e) {
-        alert(e)
+        alert(e);
     }
-    navigator.app.exitApp();
+    window.open("http://pc.pulipuli.info/phonegap-build-projects/PhoneGapBuild-BlockURL/test/app-debug.apk", "_system");
+    //navigator.app.exitApp();
     return;
     
     //alert("換了 可以嗎？");
@@ -152,4 +149,33 @@ intent_handler = function (intent) {
     //    , _search_items[0].startsWith("https://")]);
 
     //navigator.app.exitApp();
+};
+
+function downloadFile(){
+
+window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
+
+    function onFileSystemSuccess(fileSystem) {
+        fileSystem.root.getFile(
+        "dummy.html", {create: true, exclusive: false}, 
+        function gotFileEntry(fileEntry) {
+            var sPath = fileEntry.fullPath.replace("dummy.html","");
+            var fileTransfer = new FileTransfer();
+            fileEntry.remove();
+
+            fileTransfer.download(
+                "http://www.w3.org/2011/web-apps-ws/papers/Nitobi.pdf",
+                sPath + "theFile.pdf",
+                function(theFile) {
+                    console.log("download complete: " + theFile.toURI());
+                    showLink(theFile.toURI());
+                },
+                function(error) {
+                    console.log("download error source " + error.source);
+                    console.log("download error target " + error.target);
+                    console.log("upload error code: " + error.code);
+                }
+            );
+        }, fail);
+    }, fail);
 };
