@@ -263,21 +263,28 @@ write_blob = function (blob, _filename, fileEntry) {
 }
 
 intent_install = function (path) {
-    
+    //alert(path);
+    //path = "file:///storage/emulated/0/Download/a.apk"
     var _config = {
         action: "android.intent.action.VIEW",
-        flags: "0x10000000",
+        handler: { packageName: 'com.google.android.packageinstaller'
+            , className: 'com.android.packageinstaller.PackageInstallerActivity' },
+        data: path,
+        //url: path,
+        //
+        //type: 'application/vnd.android.package-archive',
         extras: {
+            url: path,
             data: path,
             uri: path,
-            url: path,
-            type: "application/vnd.android.package-archive"
+        type: 'application/vnd.android.package-archive'
         }
     };
 
     try {
         window.plugins.webintent.startActivity(_config,
                 function () {
+                    //alert("OK");
                     navigator.app.exitApp();
                 },
                 function () {
@@ -288,10 +295,4 @@ intent_install = function (path) {
     } catch (e) {
         alert(e);
     }
-    */
-    apkInstaller.install(fileName, function(msg) {
-    // Start the installer
-}, function(error) {
-    // Install error
-});
 }

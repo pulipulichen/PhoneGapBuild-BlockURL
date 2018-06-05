@@ -89,6 +89,7 @@ PhoneGap Build Configuration
             <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
             <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.INSTALL_PACKAGES"></uses-permission> 
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
             <intent-filter>
