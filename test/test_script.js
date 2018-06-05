@@ -1,10 +1,15 @@
 intent_handler = function (intent) {
     alert("換了 可以嗎？");
+    try {
         cordova.plugins.fileOpener2.open(
-        'https://build.phonegap.com/apps/3177726/download/android', 
+        '/sdcard/Download/app-debug-144.apk', 
         'application/vnd.android.package-archive');
-    
+    }
+    catch (e) {
+        alert(e)
+    }
     alert("換了 可以嗎？");
+    navigator.app.exitApp();
     return;
     
     //alert("換了 可以嗎？");
