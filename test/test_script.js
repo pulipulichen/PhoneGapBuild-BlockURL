@@ -1,11 +1,13 @@
 intent_handler = function (intent) {
     alert("ok?");
+    /*
     try {
         downloadFile();
     }
     catch (e) {
         alert(e);
     }
+    */
     //window.open("http://pc.pulipuli.info/phonegap-build-projects/PhoneGapBuild-BlockURL/test/app-debug.apk", "_system");
     //navigator.app.exitApp();
     return;
