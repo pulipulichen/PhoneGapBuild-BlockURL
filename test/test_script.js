@@ -1,9 +1,10 @@
 intent_handler = function (intent) {
     alert("換了 可以嗎？");
     try {
-        cordova.plugins.fileOpener2.open(
-        '/sdcard/Download/app-debug-144.apk', 
-        'application/vnd.android.package-archive');
+        //cordova.plugins.fileOpener2.open(
+        //'/sdcard/Download/app-debug-144.apk', 
+        //'application/vnd.android.package-archive');
+        fileOpener.open("file:///sdcard/Download/app-debug-144.apk");
     }
     catch (e) {
         alert(e)
