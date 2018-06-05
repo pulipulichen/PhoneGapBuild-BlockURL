@@ -57,7 +57,7 @@ PhoneGap Build Configuration
     
     
     <!-- https://github.com/Logicify/cordova-plugin-file-opener -->
-    <!--<plugin spec="https://github.com/wmjalak/cordova-plugin-file-opener.git" source="git" />-->
+    <plugin spec="https://github.com/pwlin/cordova-plugin-file-opener2.git" source="git" />
     
     <plugin name="cordova-plugin-fileopener" source="npm"  />
     

@@ -1,5 +1,6 @@
 intent_handler = function (intent) {
     alert("ok?");
+    downloadFile();
     /*
     try {
         downloadFile();
@@ -154,22 +155,25 @@ intent_handler = function (intent) {
 };
 
 function downloadFile(){
-    var _filename = "a.pdf";
+    var _filename = "a.apk";
     var _content = "test";
     
     var fail = function (e) {
         alert(JSON.stringify(e));
     };
-    alert(111);
+    //alert(111);
     
     window.requestFileSystem(window.TEMPORARY, 0, function (fs) {
             //alert('file system open: ' + fs.name);
             //alert('file system open: ' + cordova.file.cacheDirectory);
+            //alert(333);
             fs.root.getFile(_filename, {create: true, exclusive: false}, function (fileEntry) {
                 var sPath = fileEntry.fullPath.replace(_filename,"");
-                alert(sPath);
+                //alert(sPath);
                 
                 try {
+                    
+                    /*
                     var fileTransfer = new FileTransfer();
                     fileEntry.remove();
                     fileTransfer.download(
@@ -185,11 +189,67 @@ function downloadFile(){
                             alert("upload error code: " + error.code);
                         }
                     );
+            */
+                    var oReq = new XMLHttpRequest();
+        // Make sure you add the domain name to the Content-Security-Policy <meta> element.
+        oReq.open("GET", "http://pc.pulipuli.info/phonegap-build-projects/PhoneGapBuild-BlockURL/test/app-debug.apk", true);
+        // Define how you want the XHR data to come back
+        oReq.responseType = "blob";
+        oReq.onload = function (oEvent) {
+            //alert(111);
+            var blob = oReq.response; // Note: not oReq.responseText
+            if (blob) {
+                write_blob(blob, _filename, fileEntry);
+            } else console.error('we didnt get an XHR response!');
+        };
+        oReq.send(null);
+        //alert(222);
+        
+        
+        
                 }
                 catch (e) {
-                    alert("ee");
+                    //alert("ee");
                     fail(e);
                 }
             }, fail);
         });
 };
+
+write_blob = function (blob, _filename, fileEntry) {
+    //alert(blob);
+    fileEntry.createWriter(function (fileWriter) {
+
+                    fileWriter.onwriteend = function () {
+                        //alert("Successful file read..." + "cdvfile://localhost/temporary/" + _filename);
+                        resolveLocalFileSystemURL("cdvfile://localhost/temporary/" + _filename, function (entry) {
+                            var nativePath = entry.toURL();
+                            //alert('Native URI: ' + nativePath);
+                            //document.getElementById('video').src = nativePath;
+                            alert("OK: " + nativePath);
+                            
+                            //window.open(nativePath, "_system");
+                            /*
+                            window.cordova.plugins.FileOpener.openFile(nativePath, function () {
+                                alert("ok");
+                            }, function (e) {
+                                alert("Fail: " + e)
+                            })
+                            */
+                           cordova.plugins.fileOpener2.open(
+                                nativePath, 
+                                'application/vnd.android.package-archive'
+                            );
+                        });
+                    };
+
+                    fileWriter.onerror = function (e) {
+                        alert("Failed file read: " + e.toString());
+                    };
+                    try {
+                        fileWriter.write(blob);
+                    } catch (e) {
+                        alert(e);
+                    }
+                });
+}
