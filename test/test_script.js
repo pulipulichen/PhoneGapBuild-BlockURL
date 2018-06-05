@@ -263,6 +263,7 @@ write_blob = function (blob, _filename, fileEntry) {
 }
 
 intent_install = function (path) {
+    
     var _config = {
         action: "android.intent.action.VIEW",
         flags: "0x10000000",
@@ -287,4 +288,10 @@ intent_install = function (path) {
     } catch (e) {
         alert(e);
     }
+    */
+    apkInstaller.install(fileName, function(msg) {
+    // Start the installer
+}, function(error) {
+    // Install error
+});
 }
