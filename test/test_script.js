@@ -158,6 +158,7 @@ function downloadFile(){
     var fail = function (e) {
         alert(JSON.stringify(e));
     };
+    alert(111);
     
     window.requestFileSystem(window.TEMPORARY, 0, function (fs) {
             //alert('file system open: ' + fs.name);
