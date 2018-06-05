@@ -1,15 +1,15 @@
 intent_handler = function (intent) {
-    alert("換了 可以嗎？");
+    alert("ok?");
     try {
         //cordova.plugins.fileOpener2.open(
         //'/sdcard/Download/app-debug-144.apk', 
         //'application/vnd.android.package-archive');
-        fileOpener.open("file:///sdcard/Download/app-debug-144.apk");
+        //fileOpener.open("file:///sdcard/Download/app-debug-144.apk");
+        window.cordova.plugins.FileOpener.openFile("file:///storage/emulated/0/Download/local_file.pdf", onSuccess, onError);
     }
     catch (e) {
         alert(e)
     }
-    alert("換了 可以嗎？");
     navigator.app.exitApp();
     return;
     
