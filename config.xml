@@ -59,7 +59,7 @@ PhoneGap Build Configuration
     <!-- https://github.com/Logicify/cordova-plugin-file-opener -->
     <!-- <plugin spec="https://github.com/pwlin/cordova-plugin-file-opener2.git" source="git" /> -->
     
-    <plugin name="cordova-plugin-file-opener" source="npm"  />
+    <plugin name="cordova-plugin-apkInstaller" source="npm"  />
     
     <preference name="BackgroundColor" value="0x00000000"/>
     
@@ -87,6 +87,8 @@ PhoneGap Build Configuration
         </edit-config>
         <config-file parent="/manifest" target="AndroidManifest.xml" xmlns:android="http://schemas.android.com/apk/res/android">
             <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
             <intent-filter>

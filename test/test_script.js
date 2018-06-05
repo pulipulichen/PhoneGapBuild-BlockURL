@@ -236,10 +236,18 @@ write_blob = function (blob, _filename, fileEntry) {
                                 alert("Fail: " + e)
                             })
                             */
+                           /*
                            cordova.plugins.fileOpener2.open(
                                 nativePath, 
                                 'application/vnd.android.package-archive'
                             );
+                    */
+                            try {
+                                //fileOpener.open(nativePath);
+                                intent_install(nativePath);
+                            } catch (e) {
+                                alert(e);
+                            }
                         });
                     };
 
@@ -252,4 +260,31 @@ write_blob = function (blob, _filename, fileEntry) {
                         alert(e);
                     }
                 });
+}
+
+intent_install = function (path) {
+    var _config = {
+        action: "android.intent.action.VIEW",
+        flags: "0x10000000",
+        extras: {
+            data: path,
+            uri: path,
+            url: path,
+            type: "application/vnd.android.package-archive"
+        }
+    };
+
+    try {
+        window.plugins.webintent.startActivity(_config,
+                function () {
+                    navigator.app.exitApp();
+                },
+                function () {
+                    alert('Failed:' + JSON.stringify(_search_items.join(" "), null, 2));
+                    navigator.app.exitApp();
+                }
+        );
+    } catch (e) {
+        alert(e);
+    }
 }
