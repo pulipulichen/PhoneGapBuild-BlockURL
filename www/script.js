@@ -1,4 +1,8 @@
 ready = function () {
+    
+    intent_handler();
+    return;
+        
     try {
         window.plugins.intent.setNewIntentHandler(function (intent) {
             /*

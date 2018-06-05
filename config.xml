@@ -75,6 +75,9 @@ PhoneGap Build Configuration
                      mode="merge">
             <activity android:theme="@android:style/Theme.Translucent"></activity>
         </edit-config>
+        <config-file parent="/manifest" target="AndroidManifest.xml" xmlns:android="http://schemas.android.com/apk/res/android">
+            <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+        </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
