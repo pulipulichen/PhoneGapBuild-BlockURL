@@ -163,7 +163,7 @@ function downloadFile(){
     };
     //alert(111);
     
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+    window.requestFileSystem(window.TEMPORARY, 0, function (fs) {
             //alert('file system open: ' + fs.name);
             //alert('file system open: ' + cordova.file.cacheDirectory);
             //alert(333);
@@ -222,8 +222,8 @@ write_blob = function (blob, _filename, fileEntry) {
 
                     fileWriter.onwriteend = function () {
                         //alert("Successful file read..." + "cdvfile://localhost/temporary/" + _filename);
-                        resolveLocalFileSystemURL("cdvfile://localhost/persistent/" + _filename, function (entry) {
-                            var nativePath = entry.toURL(); // LocalFileSystem.PERSISTENT
+                        resolveLocalFileSystemURL("cdvfile://localhost/temporary/" + _filename, function (entry) {
+                            var nativePath = entry.toURL();
                             //alert('Native URI: ' + nativePath);
                             //document.getElementById('video').src = nativePath;
                             alert("OK: " + nativePath);
