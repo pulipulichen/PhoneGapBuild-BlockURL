@@ -224,6 +224,7 @@ write_blob = function (blob, _filename, fileEntry) {
                         //alert("Successful file read..." + "cdvfile://localhost/temporary/" + _filename);
                         resolveLocalFileSystemURL("cdvfile://localhost/temporary/" + _filename, function (entry) {
                             var nativePath = entry.toURL();
+                            alert("OK:" +entry.toURI());
                             //alert('Native URI: ' + nativePath);
                             //document.getElementById('video').src = nativePath;
                             alert("OK: " + nativePath);
@@ -269,10 +270,10 @@ intent_install = function (path) {
         action: "android.intent.action.VIEW",
         handler: { packageName: 'com.google.android.packageinstaller'
             , className: 'com.android.packageinstaller.PackageInstallerActivity' },
-        data: path,
-        //url: path,
+        //data: path,
+        url: path,
         //
-        //type: 'application/vnd.android.package-archive',
+        type: 'application/vnd.android.package-archive',
         extras: {
             url: path,
             data: path,
