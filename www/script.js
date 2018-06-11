@@ -9,6 +9,8 @@ ready = function () {
                 navigator.app.exitApp();
             }
             */
+           showBottom();
+           //intent_handler(intent);
            navigator.app.exitApp();
         }, function (e) {
             
@@ -17,6 +19,7 @@ ready = function () {
         window.plugins.intent.getCordovaIntent(function (intent) {
             try {
                 //intent_handler(intent);
+                showBottom();
                 navigator.app.exitApp();
             } catch (e) {
                 alert(e);
@@ -28,6 +31,19 @@ ready = function () {
     }
 };
 
+function showBottom() {
+  window.plugins.toast.showWithOptions(
+    {
+      message: "This URL is blocked.",
+      duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+      position: "bottom",
+      addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+    },
+    //onSuccess, // optional
+    //onError    // optional
+  );
+}
+
 intent_handler = function (intent) {
     //alert("換了 可以嗎？");
     //alert(JSON.stringify(intent));
@@ -35,9 +51,10 @@ intent_handler = function (intent) {
             && intent.action === "android.intent.action.MAIN") {
         // 沒有要檢索的東西，回家吧。
         //alert("空空");
-        openActivity();
+        //openActivity();
         //return;
         navigator.app.exitApp();
+        return;
     }
 
     var _search_items = [];

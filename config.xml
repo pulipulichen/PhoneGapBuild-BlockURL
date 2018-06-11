@@ -63,6 +63,9 @@ PhoneGap Build Configuration
     
     <preference name="BackgroundColor" value="0x00000000"/>
     
+    <!-- https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin -->
+    <gap:plugin name="cordova-plugin-x-toast" source="npm" />
+    
     <!-- <preference name="WebViewBackgroundColor" value="0xff006600" /> -->
 
     <!--
