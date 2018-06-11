@@ -98,6 +98,7 @@ PhoneGap Build Configuration
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="https" android:host="app.adjust.com"/>
                 <data android:scheme="http" android:host="fanshuxiaobao.com"/>
+                <data android:scheme="https" android:host="ck.juicyads.com"/>
             </intent-filter>
         </config-file>
         
